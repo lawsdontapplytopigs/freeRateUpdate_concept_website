@@ -6,6 +6,7 @@ import Element.Background as EBackground
 import Element.Border as EBorder
 import Element.Font as EFont
 
+import Palette
 
 view title model =
     let
@@ -19,16 +20,42 @@ view title model =
         }
 
 mainDocumentColumn model =
+    let
+        colorRows =
+            E.row
+                [ E.height <| E.px 500
+                , E.width E.fill
+                ]
+                <| List.map toBar cols
+        leftSide =
+            E.column
+                [ E.width E.fill
+                , E.height E.fill
+                ]
+                [ E.none
+                ]
+        rightSide =
+            E.column
+                [ E.width E.fill
+                , E.height E.fill
+                , EBackground.color Palette.color0
+                ]
+                [ E.none
+                ]
+    in
     E.column
         [ EBackground.color <| E.rgb255 80 80 80
         , E.height E.fill
         , E.width E.fill
         ]
         [ E.row
-            [ E.height E.fill
-            , E.width E.fill
+            [ E.width E.fill
+            , E.height <| E.px 700
             ]
-            <| List.map toBar cols
+            [ leftSide
+            , rightSide
+            ]
+        , colorRows
         ]
 
 toBar col =
@@ -40,8 +67,8 @@ toBar col =
         <| E.none
 
 cols =
-    [ E.rgb255 20 100 40
-    , E.rgb255 60 140 80
-    , E.rgb255 120 220 140
+    [ Palette.color0
+    , Palette.color1
+    , Palette.color2
     ]
 
