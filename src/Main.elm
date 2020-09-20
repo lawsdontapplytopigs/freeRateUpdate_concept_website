@@ -75,7 +75,7 @@ update msg model =
 
 view : Model -> Browser.Document Msg.Msg
 view model =
-    View.Home.view "hey" model
+    View.Home.view "Mortgage Rates as Low as 2.7 3.3 APR. Fixed, HARP Rates." model
 
 
 

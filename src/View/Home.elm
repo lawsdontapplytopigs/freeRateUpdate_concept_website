@@ -31,11 +31,20 @@ view title model =
 
 mainDocumentColumn model =
     let
+        toBar col =
+            E.el
+                [ E.height E.fill
+                , E.width E.fill
+                , EBackground.color col
+                ]
+                <| E.none
+
         cols =
             [ Palette.color1
             , Palette.color2
             , Palette.color3
             ]
+
         colorRows =
             E.row
                 [ E.height <| E.px 500
@@ -62,6 +71,20 @@ mainDocumentColumn model =
                     [ E.text "This site is secure. Encrypted with 128-bit SSL."
                     ]
                 ]
+        advertisingAndLicensingDisclosures =
+            E.newTabLink
+                [ EFont.color Palette.color0
+                , EFont.size 12
+                , EFont.regular
+                ]
+                { url = "https://www.freerateupdate.com/advertising_disclosure.php?type=default&disclosure=8"
+                , label = 
+                    E.el 
+                        [
+                        ]
+                        <| E.text "* Advertising and Licensing Disclosures"
+                }
+            
         leftSide =
             E.column
                 [ E.height E.fill
@@ -87,6 +110,13 @@ mainDocumentColumn model =
                                 [ E.paddingEach { top = 440, right = 30, bottom = 0, left = 30 }
                                 ]
                                 <| siteSecuredMessage
+                        , E.inFront
+                            <| E.el
+                                [ E.paddingEach { top = 0 , right = 30, bottom = 30, left = 30 }
+                                , E.alignRight
+                                , E.alignBottom
+                                ]
+                                <| advertisingAndLicensingDisclosures
                         ]          
                         [ E.column
                             [ E.centerY
@@ -218,14 +248,6 @@ mainDocumentColumn model =
         , colorRows
         ]
 
-toBar col =
-    E.el
-        [ E.height E.fill
-        , E.width E.fill
-        , EBackground.color col
-        ]
-        <| E.none
-
 
 regularRoundedButton buttons id msg icon text =
     let
@@ -305,7 +327,7 @@ leftNavbar model =
 
         makeLink { url, txt } =
             E.link
-                [ EFont.size Palette.fontSize1
+                [ EFont.size Palette.fontSize0
                 , EFont.medium
                 , EFont.color Palette.color0
                 , E.paddingXY 10 0
